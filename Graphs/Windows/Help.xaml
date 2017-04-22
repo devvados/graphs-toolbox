@@ -1,0 +1,26 @@
+﻿<controls:MetroWindow x:Class="Graphs.Help"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:local="clr-namespace:Graphs"
+        mc:Ignorable="d"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        Title="Помощь" Height="300" Width="500" ResizeMode="NoResize">
+    <Grid>
+        <TabControl Margin="15">
+            <TabItem Header="Интерфейс">
+                <ScrollViewer Margin="5">
+                    <TextBlock TextAlignment="Justify" TextWrapping="WrapWithOverflow" Margin="10" FontSize="14"><Run Text="В левой области окна " FontWeight="SemiBold"/><Run Text="представлены варианты графов для отрисовки, в том числе загрузка графа из файла."/><LineBreak/><Run Text="В правой области окна" FontWeight="SemiBold"/><Run Text=" отображаются удаленные клики в виде вершин в прямоугольнике. Очередность удаления - сверху вниз."/><LineBreak/><Run Text="По середине отображается граф, имеется возможность масштабирования и перемещения графа по области."/><LineBreak/></TextBlock>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Кнопки">
+                <ScrollViewer Margin="5">
+                    <TextBlock TextWrapping="WrapWithOverflow" Margin="10" FontSize="14"><Run Text="Кнопки в верхней панели:" FontWeight="SemiBold"/><LineBreak/><Run Text="- Назад - отмена удаления клики (отображение графа, до удаления клики)"/><LineBreak/><Run Text="- Вперед - возврат вперед"/><LineBreak/>
+                        <Run Text="Кнопки в правой области окна:" FontWeight="SemiBold"/><LineBreak/><Run Text=" - Переместить (кнопка-тумблер) - после нажатия имеется возможность перемещать вершины графа по области отрисовки. Повторное нажатие отключает режим перемещения."/><LineBreak/><Run Text="- Удалить клику - удаление клики в отображенном графе, сборка нового графа и его отображение. (применимы действия Назад и Вперед)"/></TextBlock>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</controls:MetroWindow>
