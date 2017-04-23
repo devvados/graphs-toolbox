@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
 using GraphX.Measure;
 using GraphX.PCL.Common.Models;
@@ -21,7 +17,7 @@ namespace Graphs.Model
         }
 
         public DataEdge()
-            : base(null, null, 1)
+            : base(null, null)
         {
             Angle = 90;
         }
@@ -34,7 +30,8 @@ namespace Graphs.Model
         /// Node main description (header)
         /// </summary>
         private string _text;
-        public string Text { get { return _text; } set { _text = value; OnPropertyChanged("Text"); } }
+        public string Text { get => _text;
+            set { _text = value; OnPropertyChanged("Text"); } }
         public string ToolTipText { get; set; }
 
         public override string ToString()
@@ -46,8 +43,7 @@ namespace Graphs.Model
 
         public void OnPropertyChanged(string name)
         {
-            if (PropertyChanged != null)
-                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

@@ -7,29 +7,26 @@ using System.Threading.Tasks;
 
 namespace Graphs.Model
 {
-    class Clique : IEnumerable<DataVertex>, IEnumerable, ICloneable, IComparable<Clique>
-    { 
-        List<DataVertex> vertexList;
+    class Clique : IEnumerable<DataVertex>, ICloneable, IComparable<Clique>
+    {
+        readonly List<DataVertex> _vertexList;
 
         public Clique()
         {
-            vertexList = new List<DataVertex>();
+            _vertexList = new List<DataVertex>();
         }
 
         public Clique(List<DataVertex> vl)
         {
-            vertexList = new List<DataVertex>(vl);
+            _vertexList = new List<DataVertex>(vl);
         }
 
-        public int Count
-        {
-            get { return vertexList.Count; }
-        }
+        public int Count => _vertexList.Count;
 
         public DataVertex this[int index]
         {
-            get { return vertexList[index]; }
-            set { vertexList.Insert(index, value); }
+            get => _vertexList[index];
+            set => _vertexList.Insert(index, value);
         }
 
         /// <summary>
@@ -38,7 +35,7 @@ namespace Graphs.Model
         /// <param name="v"></param>
         public void Add(DataVertex v)
         {
-            vertexList.Add(v);
+            _vertexList.Add(v);
         }
 
         /// <summary>
@@ -47,7 +44,7 @@ namespace Graphs.Model
         /// <param name="c"></param>
         public void AddClique(Clique c)
         {
-            vertexList.AddRange(c.vertexList);
+            _vertexList.AddRange(c._vertexList);
         }
 
         /// <summary>
@@ -56,7 +53,7 @@ namespace Graphs.Model
         /// <param name="c"></param>
         public void RemoveVertices(string c)
         {
-            vertexList.RemoveAll(x => x.Text == c);
+            _vertexList.RemoveAll(x => x.Text == c);
         }
 
         /// <summary>
@@ -65,7 +62,7 @@ namespace Graphs.Model
         /// <returns></returns>
         public Clique OrderByID()
         {
-            var orderedList = vertexList.OrderBy(x => x.ID).ToList();
+            var orderedList = _vertexList.OrderBy(x => x.ID).ToList();
             var clique = new Clique(orderedList);
             return clique;
         }
@@ -74,12 +71,12 @@ namespace Graphs.Model
 
         public IEnumerator<DataVertex> GetEnumerator()
         {
-            return vertexList.GetEnumerator();
+            return _vertexList.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
 
         #endregion
@@ -88,7 +85,7 @@ namespace Graphs.Model
 
         public object Clone()
         {
-            return new List<DataVertex>(vertexList);
+            return new List<DataVertex>(_vertexList);
         }
 
         #endregion
@@ -101,17 +98,17 @@ namespace Graphs.Model
 
             if (other != null)
             {
-                if (vertexList.Count == other.Count)
+                if (_vertexList.Count == other.Count)
                 {
-                    for (var i = 0; i < vertexList.Count; i++)
+                    for (var i = 0; i < _vertexList.Count; i++)
                     {
-                        if (vertexList[i].Angle == other[i].Angle &&
-                           vertexList[i].Color == other[i].Color &&
-                           vertexList[i].E == other[i].E &&
-                           vertexList[i].GroupId == other[i].GroupId &&
-                           vertexList[i].SkipProcessing == other[i].SkipProcessing &&
-                           vertexList[i].ID == other[i].ID &&
-                           vertexList[i].Text == other[i].Text)
+                        if (Math.Abs(_vertexList[i].Angle - other[i].Angle) < 0.0001 &&
+                           _vertexList[i].Color == other[i].Color &&
+                           _vertexList[i].E == other[i].E &&
+                           _vertexList[i].GroupId == other[i].GroupId &&
+                           _vertexList[i].SkipProcessing == other[i].SkipProcessing &&
+                           _vertexList[i].ID == other[i].ID &&
+                           _vertexList[i].Text == other[i].Text)
                         {
                             compareResult = 1;
                         }

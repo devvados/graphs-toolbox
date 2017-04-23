@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using GraphX.Controls;
 using QuickGraph;
 using Graphs.Algorithms;
 using System;
@@ -25,12 +24,12 @@ namespace Graphs.Pattern
 
     internal class DeleteCliqueCommand : Command
     {
-        public int deleteMode;
+        public int DeleteMode;
         public BidirectionalGraph<DataVertex, DataEdge> OldGraph;
         public List<Clique> OldCliques;
         public static StackPanel Sp;
 
-        public DeleteCliqueCommand(int mode) { deleteMode = mode; }
+        public DeleteCliqueCommand(int mode) { DeleteMode = mode; }
 
         public override void Execute()
         {
@@ -107,7 +106,7 @@ namespace Graphs.Pattern
             FindAllCliques();
 
             //проверка режима удаления
-            if (deleteMode == 2)
+            if (DeleteMode == 2)
             {
                 GroupCliques();
             }
@@ -134,7 +133,7 @@ namespace Graphs.Pattern
             {
                 //поиск всех ребер, где вершина является началом и концом
                 var edgesBegin = Graph.Edges.ToList().FindAll(x => x.Source.ID == vertex.ID);
-                var edgesEnd = Graph.Edges.ToList().FindAll(x => x.Target.ID == vertex.ID);
+                //var edgesEnd = Graph.Edges.ToList().FindAll(x => x.Target.ID == vertex.ID);
                 var neighbourVertices = new List<DataVertex>();
 
                 //получили всех соседей удаляемой вершины
@@ -260,12 +259,7 @@ namespace Graphs.Pattern
             var sbClique = new StringBuilder("(");
             foreach (var ver in cliqueList)
             {
-                if(ver.Text == "0")
-                {
-                    sbClique.Append(") U (");
-                }
-                else
-                    sbClique.Append($" {ver.Text} ");
+                sbClique.Append(ver.Text == "0" ? ") U (" : $" {ver.Text} ");
             }
             sbClique.Append(")");
 

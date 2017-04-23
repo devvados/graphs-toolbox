@@ -1,5 +1,4 @@
 ﻿using Graphs.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -27,14 +26,13 @@ namespace Graphs.Algorithms
         {
             if (P.Count < 1 && X.Count < 1)
             {
-                Clique clique = new Clique(new List<DataVertex>(R));
+                var clique = new Clique(new List<DataVertex>(R));
                 Cliques.Add(clique);
             }
 
             foreach (var v in P)
             {
-                var r = new Clique(new List<DataVertex>(R));
-                r.Add(v);
+                var r = new Clique(new List<DataVertex>(R)) {v};
 
                 var p = P.FindAll(ver => EdgeExists(ver, v));
                 var x = X.FindAll(ver => EdgeExists(ver, v));
@@ -105,7 +103,7 @@ namespace Graphs.Algorithms
                 var orderedSublist = l.OrderByID();
 
                 //проверяем дублирование клики
-                if(!tempList.Any(item=>item.CompareTo(orderedSublist) != 0))
+                if(tempList.All(item => item.CompareTo(orderedSublist) == 0))
                 {
                     tempList.Add(l);
                 }

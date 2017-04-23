@@ -1,10 +1,6 @@
 ﻿using Graphs.Model;
 using QuickGraph;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Graphs.Pattern
 {
@@ -18,15 +14,15 @@ namespace Graphs.Pattern
 
     class Director
     {
-        Builder builder;
+        readonly Builder _builder;
         public Director(Builder builder)
         {
-            this.builder = builder;
+            this._builder = builder;
         }
         public void Construct(int[,] m)
         {
-            builder.BuildMatrix(m);
-            builder.BuildGraph();
+            _builder.BuildMatrix(m);
+            _builder.BuildGraph();
         }
     }
 

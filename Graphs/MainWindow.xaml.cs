@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Shapes;
-using Graphs.Algorithms;
 using Graphs.Pattern;
 using MahApps.Metro.Controls;
 using QuickGraph;
@@ -105,7 +101,7 @@ namespace Graphs
                     };
                     break;
                 case 3:
-                    Data2D = Data2D = new[,]
+                    Data2D = new[,]
                     {
                         { 0, 1, 1, 0, 1, 1 },
                         { 1, 0, 1, 1, 0, 1 },
@@ -150,7 +146,7 @@ namespace Graphs
 
         private void RBSelectGraph_Checked(object sender, RoutedEventArgs e)
         {
-            int selectedGraph = Convert.ToInt32((sender as RadioButton).Tag);
+            var selectedGraph = Convert.ToInt32((sender as RadioButton)?.Tag);
             var m = BuildMatrix(selectedGraph);
 
             if (m.Length > 1)
@@ -202,16 +198,6 @@ namespace Graphs
                 _commandCounter++;
                 _commands[_commandCounter].Execute();
             }
-        }
-
-        /// <summary>
-        /// Очистить поле отрисовки
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BClearLayout_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         #endregion
@@ -338,12 +324,12 @@ namespace Graphs
         {
             var dlg = new System.Windows.Forms.OpenFileDialog()
             {
-                Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*"
+                Filter = @"Text files(*.txt)|*.txt|All files(*.*)|*.*"
             };
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
                 return "";
             // получаем выбранный файл
-            string filename = dlg.FileName;
+            var filename = dlg.FileName;
 
             return filename;
         }
@@ -354,16 +340,16 @@ namespace Graphs
         /// <param name="filename"></param>
         public int[,] ReadGraphFromFile(string filename)
         {
-            List<string> input = File.ReadAllText(filename).Replace("\r\n", "\n").Replace(" \n", "\n").Split('\n').ToList();
-            int size = Convert.ToInt32(input[0]);
+            var input = File.ReadAllText(filename).Replace("\r\n", "\n").Replace(" \n", "\n").Split('\n').ToList();
+            var size = Convert.ToInt32(input[0]);
             input.RemoveAt(0);
-            int i = 0, j = 0;
+            var i = 0;
 
-            int[,] result = new int[size, size];
+            var result = new int[size, size];
             foreach (var row in input)
             {
-                j = 0;
-                foreach (var col in row.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries))
+                var j = 0;
+                foreach (var col in row.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     result[i, j] = int.Parse(col.Trim());
                     j++;
@@ -424,11 +410,10 @@ namespace Graphs
 
         private void BChangeMode_Checked(object sender, RoutedEventArgs e)
         {
-            if (BChangeMode.IsChecked == true && sender == BChangeMode)
+            if (BChangeMode.IsChecked == true && Equals(sender, BChangeMode))
             {
                 ZoomCtrl.Cursor = Cursors.Hand;
                 GraphArea.SetVerticesDrag(true, true);
-                return;
             }
         }
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Graphs.Pattern
 {
@@ -11,42 +7,42 @@ namespace Graphs.Pattern
         public abstract int[,] Transform();
     }
 
-    class CliqueMatrixAdapter : Adapter
+    internal class CliqueMatrixAdapter : Adapter
     {
-        int[,] cliqueMatrix;
+        readonly int[,] _cliqueMatrix;
 
         public CliqueMatrixAdapter(int[,] m)
         {
-            cliqueMatrix = (int[,])m.Clone();
+            _cliqueMatrix = (int[,])m.Clone();
         }
 
         public override int[,] Transform()
         {
             //массив m*n
-            int[,] RetV = new int[cliqueMatrix.GetLength(1), cliqueMatrix.GetLength(1)];
-            int n = cliqueMatrix.GetLength(1);
-            for (int k = 0; k < cliqueMatrix.GetLength(0); k++)
+            var retV = new int[_cliqueMatrix.GetLength(1), _cliqueMatrix.GetLength(1)];
+            var n = _cliqueMatrix.GetLength(1);
+            for (var k = 0; k < _cliqueMatrix.GetLength(0); k++)
             {
-                List<int> TA = new List<int>();
-                for (int j = 0; j < n; j++)
-                    if (cliqueMatrix[k, j] == 1)
-                        TA.Add(j);
-                for (int i = 0; i < TA.Count - 1; i++)
+                var ta = new List<int>();
+                for (var j = 0; j < n; j++)
+                    if (_cliqueMatrix[k, j] == 1)
+                        ta.Add(j);
+                for (var i = 0; i < ta.Count - 1; i++)
                 {
-                    for (int j = i + 1; j < TA.Count; j++)
+                    for (var j = i + 1; j < ta.Count; j++)
                     {
-                        RetV[TA[i], TA[j]] = 1;
+                        retV[ta[i], ta[j]] = 1;
                     }
                 }
             }
-            for (int i = 0; i < RetV.GetLength(0) - 1; i++)
+            for (var i = 0; i < retV.GetLength(0) - 1; i++)
             {
-                for (int j = i + 1; j < RetV.GetLength(1); j++)
+                for (var j = i + 1; j < retV.GetLength(1); j++)
                 {
-                    RetV[j, i] = RetV[i, j];
+                    retV[j, i] = retV[i, j];
                 }
             }
-            return RetV;
+            return retV;
         }
     }
 }

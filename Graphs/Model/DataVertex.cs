@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GraphX.PCL.Common.Models;
 
 namespace Graphs.Model
@@ -29,13 +25,13 @@ namespace Graphs.Model
         {
             return new DataVertex
             {
-                Angle = this.Angle,
-                Color = this.Color,
-                E = this.E,
-                GroupId = this.GroupId,
-                ID = this.ID,
-                SkipProcessing = this.SkipProcessing,
-                Text = this.Text
+                Angle = Angle,
+                Color = Color,
+                E = E,
+                GroupId = GroupId,
+                ID = ID,
+                SkipProcessing = SkipProcessing,
+                Text = Text
             };
         }
 
